@@ -1,4 +1,6 @@
 # Getris
+File .exe ada di branch master
+
 Tetris alike game made with Godot engine.
 
 
