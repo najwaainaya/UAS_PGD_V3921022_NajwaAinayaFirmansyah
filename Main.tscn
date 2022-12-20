@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/background.png" type="Texture" id=1]
+[ext_resource path="res://assets/body.png" type="Texture" id=2]
+[ext_resource path="res://Main.gd" type="Script" id=3]
+[ext_resource path="res://NextShapePanel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Points_Panel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/Score.png" type="Texture" id=6]
+[ext_resource path="res://Points_Panel.gd" type="Script" id=7]
+[ext_resource path="res://assets/next.png" type="Texture" id=8]
+[ext_resource path="res://assets/log-out.png" type="Texture" id=9]
+[ext_resource path="res://assets/Sound Effect Tet-Ritch/sound_full.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/Sound Effect Tet-Ritch/line.wav" type="AudioStream" id=11]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Bkg" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="ShapesArea" type="Sprite" parent="."]
+position = Vector2( 248, 234 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="next" type="Sprite" parent="."]
+position = Vector2( 121, 396 )
+scale = Vector2( 2.52841, 2.52841 )
+texture = ExtResource( 8 )
+
+[node name="Score" type="Sprite" parent="."]
+position = Vector2( 659, 156 )
+texture = ExtResource( 6 )
+
+[node name="Points_Panel" parent="." instance=ExtResource( 5 )]
+modulate = Color( 0.0392157, 0.141176, 0.823529, 1 )
+self_modulate = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+position = Vector2( 438, 105 )
+script = ExtResource( 7 )
+
+[node name="NextShapePanel" parent="." instance=ExtResource( 4 )]
+position = Vector2( 31, 343 )
+scale = Vector2( 1.5, 1.5 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="soundrotate" type="AudioStreamPlayer2D" parent="."]
+volume_db = 9.435
+
+[node name="gameoversound" type="AudioStreamPlayer2D" parent="."]
+volume_db = 13.983
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 30.0
+margin_top = 1690.0
+margin_right = 62.0
+margin_bottom = 1716.0
+rect_scale = Vector2( 6, 6 )
+
+[node name="Button" type="Button" parent="MarginContainer"]
+margin_right = 32.0
+margin_bottom = 26.0
+icon = ExtResource( 9 )
+flat = true
+
+[node name="backsound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+volume_db = 10.124
+pitch_scale = 1.04
+autoplay = true
+
+[node name="soundleftraight" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 11 )
+volume_db = 10.124
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="MarginContainer/Button" to="." method="_on_Button_pressed"]
